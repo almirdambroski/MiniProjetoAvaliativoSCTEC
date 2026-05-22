@@ -36,3 +36,43 @@ const vagas = [
     modalidade: "Presencial"
     }
 ];
+
+//RF09 – Criar uma classe
+//Criar pelo menos uma classe simples
+class Vaga {
+constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa = empresa;
+    this.cargo = cargo;
+    this.requisitos = requisitos;
+    this.salario = salario;
+    this.modalidade = modalidade;
+    }
+
+
+    //RF11 – Demonstrar uso do this
+    //Demostrar pelo 1 this
+    exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+    }
+}
+
+//Rf10 - Uso de herança
+//Herdar poderes da classe vaga (pai)
+class VagaFrontEnd extends Vaga {
+constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);//O metodo super() repassa dados para o construtor da classe Vaga()
+    this.nivel = nivel; ///Atributos exclusivo desta classe filho (Exemplo: Junir, estagiario)
+    }
+    exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
+    }
+}
+
+//RF02 Lista ofical das vagas
+//Estanciando as classe.
+
+const listaVagas = [
+    new VagaFrontEnd("TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação"], 2800, "Remoto", "Júnior"),
+    new VagaFrontEnd("CodeLab", "Estágio Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido", "Estágio"),
+    new Vaga("WebSolutions", "Programador JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial")
+];
