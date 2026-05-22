@@ -120,6 +120,30 @@ function analizarVaga(vaga, habilidadesCandidato){
         classificacao: classificacao
     };
 }
+//RF13 - Usando closure - Para criar um contador interno 
+
+function criarContadorDeAnalises() {
+  let total = 0; //Variavel protegida internamento pelo escopo da closure
+
+  return function () {
+    total++;//Faz incremento a variável interna toda vez que a função interna é chamada
+    return total; //retorna
+  };
+}
+//Incializa o contador da análise
+const contarProximaAnalisse = criarContadorDeAnalises();
+
+//RF12 - Usar callback   (Vai executar ao finalizar todo o processamento)
+//Criar uma função que receba outra função como parâmetro
+function finalizarAnalise(nomeCandidato, callback){
+    console.log("\n------------------------------------------------");
+    console.log("Analisse finalisada.");
+    callback(nomeCandidato);
+}
+function exibirMensagemFinal(nome){
+
+    console.log(`${nome},revise suas habilidades faltantes e atualise seu planos de estudos.`);
+}
 
 
 
