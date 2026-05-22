@@ -76,3 +76,51 @@ const listaVagas = [
     new VagaFrontEnd("CodeLab", "Estágio Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido", "Estágio"),
     new Vaga("WebSolutions", "Programador JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial")
 ];
+
+//Rf 04 - Classificar a compatibilidade
+// Usar condição if else
+function classificarCompatibilidade(percentual){
+    if(percentual >= 80){
+        return "Alta compatibilidade";
+    }else if(percentual >= 50){
+        return "Media Compatibilidade"
+    }else{
+        return "Baixa compatibilidade";
+    }
+}
+//Rf03, RF02, RF08 analizar a cada vaga com o metodo array.
+function analizarVaga(vaga, habilidadesCandidato){
+    //Rf08 com o filter -> Filtra a guarda as bilidades que o candidato possui.
+    const habilidadesEncontradas = vaga.requisitos.filter(req =>
+        habilidadesCandidato.includes(req)
+    );
+
+     //Rf08 com o filter -> Filtra a guarda as habilidades que esta faltando com o candidato.
+    const habilidadesEncontradas = vaga.requisitos.filter(req =>
+        !habilidadesCandidato.includes(req)  //Ponto de esclamação inverte a busca do filter
+    );
+
+    //RF03 - Cáculo matematico da porcentagem de compatibllidade.
+    const totalRequisitosvaga = vaga.requisitos.length;
+    const totalAtendidos = habilidadesEncontradas.length;
+
+    //Foi usado a Regua dos três para calcular o percentual.
+    const percentual = totalRequisitosvaga >0 ? Math.round((totalAtendidos / totalRequisitosvaga)*100) : 0;
+
+    //APlica a classificação da RF04 baseada em porcentagem
+    const classificacao = classificarCompatibilidade(percentual);
+    
+    //Retorna um objetos com a demonstração completa da vaga.
+    return{
+        empresa: vaga.empresa,
+        cargo: vaga.cargo,
+        compatibilidade: percentual,
+        habilidadesEncontradas: habilidadesEncontradas,
+        habilidadesFaltantes: habilidadesFaltantes,
+        classificacao: classificacao
+    };
+}
+
+
+
+    
