@@ -175,6 +175,68 @@ function buscarVagasSimuladas() {
 }
 
 
+//Função principal assíncrona reponsável por gerencial o fluxo completo do sistema
+async function iniciarSistema() {
+    console.log("Carregando vagas do servidor simulado...");
+
+    //o "awai" faz o código carregar um segundo até que a Promisse seja resolvido
+  const vagasCarregadas = await buscarVagasSimuladas();
+  console.log("Vagas carregadas com sucesso");
+
+  // RF08 - Usar métodos de array -. trasnforma uma lista de vagas em um lista de análisse.
+  // O projeto deverá usar pelo menos 3 métodos de array entre: map; filter; find; every; reduce.
+  const resultadosDasAnalises = vagasCarregadas.compatibilidade(vaga=>{
+    contarProximaAnalisse(); //Incrmenta o contador privado da closure
+    return analizarVaga(vaga, candidato.habilidades);
+  });
+
+//  EXIBIÇÃO DOS RESULTADOS NO CONSULE
+
+//RF03 - Exibe os dados individuais de compatibilidade de cada vaga CONFORME O MODELO RF03
+resultadosDasAnalises.forEach(analise => {
+        console.log(`Empresa: ${analise.empresa}`);
+        console.log(`Cargo: ${analise.cargo}`);
+        console.log(`Compatibilidade: ${analise.compatibilidade}%`);
+        console.log(`Habilidades encontradas: ${analise.habilidadesEncontradas.join(", ")}`);
+        console.log(`Habilidades faltantes: ${analise.habilidadesFaltantes.join(", ") || "Nenhuma"}`);
+        console.log(`Classificação: ${analise.classificacao}`);
+        console.log("------------------------------------------------");
+    });
+
+   //RF05 detalhamente das habilidades faltante agrupadas
+   console.log("\n   DETALHAMENTE DAS  HABILIDADES FALTANTE ===");
+   resultadosDasAnalises.forEach(analise => {
+        if(analise.habilidadesFaltantes.length > 0) {
+            console.log(`Para a vaga da ${analise.empresa}, faltam:`);
+            analise.habilidadesFaltantes.forEach(skill => console.log(` - ${skill}`));
+    }
+   });
+
+   //RF06 - Encontrando a vaga com maior compatibilidade usando (loop for....of)
+   let vagaMaisCompativel = null;
+   for(const analise of resultadosDasAnalises){
+    if(!vagaMaisCompativel || analise.compatibilidade > vagaMaisCompativel.compatibilidade){
+        vagaMaisCompativel = analise;
+    }
+   }
+
+   if(vagaMaisCompativel){
+    console("\n  VAGA MAIS COMPATÍVEL ");
+    console.log(`Vaga mais compatível: ${vagaMaisCompativel.empresa} - ${vagaMaisCompativel.cargo}`);
+    console.log(`Compatibilidade: ${vagaMaisCompativel.compatibilidade}%`);
+   }
+
+   //RF07 - Exibe a recomendação unificada de estudos
+   console("\n  RECOMENDAÇÃO DE ESTUDOS");
+   const recomendacao = gerarRecomendacaoEstudo(resultadosDasAnalises);
+   console.log(recomendacao);
+
+   // RF12 - Encerrando o fluxo chamando a função de calback
+
+   finalizarAnalise(candidato.nome, exibirMensagemFinal);
+}
+//exeutar o sistema completo
+iniciarSistema();
 
 
 
