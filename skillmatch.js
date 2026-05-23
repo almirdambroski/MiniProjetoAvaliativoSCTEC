@@ -144,6 +144,38 @@ function exibirMensagemFinal(nome){
 
     console.log(`${nome},revise suas habilidades faltantes e atualise seu planos de estudos.`);
 }
+//RF07 - Gerar uma recomendação de estudo
+//Com base nas habilidades faltantes, o sistema deverá sugerir o que estudar
+
+function gerarRecomendacaoEstudo(todasAnalises) {
+    let listaFaltantesAcumuladas = [];
+
+    //Juntar todas as habilidades que faltam em uma lista única.
+    todasAnalises.forEach(analise =>{
+        analise.habilidadesFaltantes.forEach(skill =>{
+            if(!listaFaltantesAcumuladas.includes(skill)){
+                listaFaltantesAcumuladas.push(skill);
+            }
+        });
+    });
+    if(listaFaltantesAcumuladas.length === 0){
+        return "Parabéns! Você esta muito bem e atende todos s requisitos das vagas analisadas."
+    }
+    return `Priorize estudar: [${listaFaltantesAcumuladas.join(", ")}], pois esses conteúdos aparecem nas vagas analisadas.`
+}
+
+//RF14 - Usar Promise e async/await
+//Simular o carregamento das vagas como se os dados viessem de um servidor. Não é necessário usar API real. 
+function buscarVagasSimuladas() {
+  return new Promise((resolve) => {
+    setTimeout(() => {//Simula um atrasod e 1 segundo (100ms) para responder simulado a rede
+      resolve(listaVagas);//Vai criar a lista de vagas que criamos la no começo
+    }, 1000);
+  });
+}
+
+
+
 
 
 
