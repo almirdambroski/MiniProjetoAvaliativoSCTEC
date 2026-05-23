@@ -96,7 +96,7 @@ function analizarVaga(vaga, habilidadesCandidato){
     );
 
      //Rf08 com o filter -> Filtra a guarda as habilidades que esta faltando com o candidato.
-    const habilidadesEncontradas = vaga.requisitos.filter(req =>
+    const habilidadesFaltantes = vaga.requisitos.filter(req =>
         !habilidadesCandidato.includes(req)  //Ponto de esclamação inverte a busca do filter
     );
 
@@ -185,11 +185,10 @@ async function iniciarSistema() {
 
   // RF08 - Usar métodos de array -. trasnforma uma lista de vagas em um lista de análisse.
   // O projeto deverá usar pelo menos 3 métodos de array entre: map; filter; find; every; reduce.
-  const resultadosDasAnalises = vagasCarregadas.compatibilidade(vaga=>{
-    contarProximaAnalisse(); //Incrmenta o contador privado da closure
+ const resultadosDasAnalises = vagasCarregadas.map(vaga => {
+    contarProximaAnalisse(); // Incrementa o contador privado da closure
     return analizarVaga(vaga, candidato.habilidades);
-  });
-
+});
 //  EXIBIÇÃO DOS RESULTADOS NO CONSULE
 
 //RF03 - Exibe os dados individuais de compatibilidade de cada vaga CONFORME O MODELO RF03
@@ -221,13 +220,13 @@ resultadosDasAnalises.forEach(analise => {
    }
 
    if(vagaMaisCompativel){
-    console("\n  VAGA MAIS COMPATÍVEL ");
+    console.log("\n  VAGA MAIS COMPATÍVEL ");
     console.log(`Vaga mais compatível: ${vagaMaisCompativel.empresa} - ${vagaMaisCompativel.cargo}`);
     console.log(`Compatibilidade: ${vagaMaisCompativel.compatibilidade}%`);
    }
 
    //RF07 - Exibe a recomendação unificada de estudos
-   console("\n  RECOMENDAÇÃO DE ESTUDOS");
+   console.log("\n  RECOMENDAÇÃO DE ESTUDOS");
    const recomendacao = gerarRecomendacaoEstudo(resultadosDasAnalises);
    console.log(recomendacao);
 
