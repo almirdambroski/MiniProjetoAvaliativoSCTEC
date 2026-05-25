@@ -8,6 +8,26 @@ const candidato = {
     experienciaMeses: 3
 };
 
+
+
+//RF09 – Criar uma classe
+//Criar pelo menos uma classe simples
+class Vaga {
+constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa = empresa;
+    this.cargo = cargo;
+    this.requisitos = requisitos;
+    this.salario = salario;
+    this.modalidade = modalidade;
+    }
+
+
+    //RF11 – Demonstrar uso do this
+    //Demostrar pelo 1 this
+    exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+    }
+}
 //RF02 – Criar uma lista de vagas
 //array com pelo menos 03 vagas fictícias.
 const vagas = [
@@ -36,26 +56,6 @@ const vagas = [
     modalidade: "Presencial"
     }
 ];
-
-//RF09 – Criar uma classe
-//Criar pelo menos uma classe simples
-class Vaga {
-constructor(empresa, cargo, requisitos, salario, modalidade) {
-    this.empresa = empresa;
-    this.cargo = cargo;
-    this.requisitos = requisitos;
-    this.salario = salario;
-    this.modalidade = modalidade;
-    }
-
-
-    //RF11 – Demonstrar uso do this
-    //Demostrar pelo 1 this
-    exibirResumo() {
-    return `${this.cargo} na empresa ${this.empresa}`;
-    }
-}
-
 //Rf10 - Uso de herança
 //Herdar poderes da classe vaga (pai)
 class VagaFrontEnd extends Vaga {
@@ -74,7 +74,7 @@ constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
 const listaVagas = [
     new VagaFrontEnd("TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação"], 2800, "Remoto", "Júnior"),
     new VagaFrontEnd("CodeLab", "Estágio Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido", "Estágio"),
-    new Vaga("WebSolutions", "Programador JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial")
+    new VagaFrontEnd("WebSolutions", "Programador JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial", "Júnior")
 ];
 
 //Rf 04 - Classificar a compatibilidade
@@ -205,10 +205,13 @@ resultadosDasAnalises.forEach(analise => {
    //RF05 detalhamente das habilidades faltante agrupadas
    console.log("\n   DETALHAMENTE DAS  HABILIDADES FALTANTE ===");
    resultadosDasAnalises.forEach(analise => {
+    
         if(analise.habilidadesFaltantes.length > 0) {
             console.log(`Para a vaga da ${analise.empresa}, faltam:`);
             analise.habilidadesFaltantes.forEach(skill => console.log(` - ${skill}`));
-    }
+    }else{
+            console.log(`Para a vaga da ${analise.empresa}: Você possui todos os requisitos!`);
+        }
    });
 
    //RF06 - Encontrando a vaga com maior compatibilidade usando (loop for....of)
@@ -241,3 +244,4 @@ iniciarSistema();
 
 
     
+
