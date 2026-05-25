@@ -84,6 +84,7 @@ NO projeto foi usado os conceito de:
 ## Como executar o projeto
 
 1. Clone este repositório:
+<<<<<<< HEAD
    Para executar não precisa de NODE.js
    git clone [https://github.com/almirdambroski/MiniProjetoAvaliativoSCTEC.git]
 
@@ -117,3 +118,8 @@ Kanban
 https://trello.com/invite/b/6a0bc65b5d0b3496b5303bed/ATTI5cbb1de03cc44546924110ebc8e55ef8C3348272/skillmatch
 
 Vídeo
+=======
+   ```bash
+   git clone [https://github.com/almirdambroski/MiniProjetoAvaliativoSCTEC.git](https://github.com/almirdambroski/MiniProjetoAvaliativoSCTEC.git)
+   ```
+>>>>>>> docs/readme
