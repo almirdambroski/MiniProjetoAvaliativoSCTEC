@@ -13,3 +13,4 @@ Este é um projeto desenvolvido como parte da avaliação do programa Carreira T
 1. Clone este repositório:
    ```bash
    git clone [https://github.com/almirdambroski/MiniProjetoAvaliativoSCTEC.git](https://github.com/almirdambroski/MiniProjetoAvaliativoSCTEC.git)
+   ```
